@@ -1,27 +1,29 @@
 <template>
-  <main class="container">
-    <input type="text" v-model="todoInput" @keyup.enter="addTodo" placeholder="I need to do..." />
+  <main class="todo">
+    <input
+      class="list-input"
+      type="text"
+      v-model="todoInput"
+      @keyup.enter="addTodo"
+      placeholder="I need to..."
+    />
 
-    <div
-      class="card"
-      v-for="todo in todos"
-      @click="complete(todo)"
-      @contextmenu="deleteTodo($event, todo)"
-      :key="todo"
-    >
-      <div class="card-body" :class="{ done: todo.done }">{{ todo.title }}</div>
-    </div>
+    <p class="desc" style="margin-bottom: 0">To mark as done, just click it!</p>
+    <p class="desc">you can delete notes by right clicking it too.</p>
 
-    <!-- <ul>
-      <li
+    <div class="list">
+      <div
+        :class="{ done: todo.done }"
+        class="list-item"
         v-for="todo in todos"
         @click="complete(todo)"
         @contextmenu="deleteTodo($event, todo)"
         :key="todo"
       >
-        <p :class="{ done: todo.done }">{{ todo.title }}</p>
-      </li>
-    </ul>-->
+        <p class="item-title">{{ todo.title }}</p>
+        <span @click="deleteTodo($event, todo)" class="close-icon">&times;</span>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -31,13 +33,21 @@ export default {
   data() {
     return {
       todoInput: "",
-      todos: []
+      todos: [
+        {
+          title: "Your first todo item!",
+          done: false
+        }
+      ]
     };
   },
   methods: {
     addTodo() {
+      const capitalize = string =>
+        string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
       this.todos.push({
-        title: this.todoInput,
+        title: capitalize(this.todoInput),
         done: false
       });
 
@@ -58,4 +68,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import "./style.css";
 </style>
