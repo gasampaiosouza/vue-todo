@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-color: #e63946;
+  --black-color: #264653;
+  --width: max(50%, 400px);
+  --default-spacing: 15px;
+  --border: 2.5px;
+  --done-color: #2a9d8f;
+}
+
+body,
+button,
+input {
+  font-family: Inter, sans-serif;
+}
+
+.todo {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.list {
+  margin: 0 auto;
+  width: var(--width);
+  box-shadow: 5px 5px 15px rgba(204, 204, 204, 0.5);
+}
+
+.list-input {
+  /* not sure if it works in all of the browsers */
+  width: var(--width);
+
+  padding: var(--default-spacing);
+  border: 1px solid rgba(204, 204, 204, 0.5);
+  border-radius: var(--border);
+
+  font-size: 1em;
+
+  background: #fafafa;
+  transition: background 0.15s ease-in-out;
+}
+
+.list-input:focus {
+  background: #fff;
+}
+
+.list-item {
+  position: relative;
+  user-select: none;
+  border: 1px solid rgba(204, 204, 204, 0.5);
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: var(--default-spacing);
+
+  color: var(--black-color);
+
+  background: #fafafa;
+  /* box-shadow: 5px 5px 15px rgba(204, 204, 204, 0.5); */
+
+  padding: var(--default-spacing);
+  text-align: left;
+  border-radius: var(--border);
+  transition-property: box-shadow;
+  transition: 0.25s ease-in-out;
+}
+
+.list-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 3px;
+  height: 0;
+  background: var(--done-color);
+
+  transition: height 0.2s ease-in-out;
+}
+
+.item-title {
+  transition-property: opacity;
+  transition: 0.125s ease-in-out;
+}
+
+.close-icon {
+  width: 25px;
+  height: 25px;
+
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+
+  cursor: pointer;
+  font-size: 1.3em;
+
+  transition-property: background, color;
+  transition: 0.2s ease-in-out;
+}
+
+.close-icon:hover {
+  color: #fff;
+  background: var(--main-color);
+}
+
+.desc {
+  opacity: 0.5;
+  margin: var(--default-spacing) 0;
+}
+
+.done::after {
+  top: 0;
+  height: 100%;
+}
+
+.done > .item-title {
+  text-decoration: line-through;
+  opacity: 0.35;
+}
